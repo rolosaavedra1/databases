@@ -16,7 +16,7 @@ CREATE TABLE rooms (
 );
 
 CREATE TABLE messages (
-  id int(16) NOT NULL,
+  id int(16) DEFAULT 0 NOT NULL AUTO_INCREMENT,
   text VARCHAR(200) NOT NULL,
   user_id VARCHAR(200),
   room_id VARCHAR(200),
