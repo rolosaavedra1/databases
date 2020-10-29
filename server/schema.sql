@@ -1,29 +1,29 @@
+DROP DATABASE IF EXISTS chat;
 CREATE DATABASE chat;
-
 USE chat;
 
 /* Create other tables and define schemas for them here! */
 CREATE TABLE users (
   id VARCHAR(200) NOT NULL,
-  created_at date,
+  createdAt date,
   PRIMARY KEY (id)
 );
 
 CREATE TABLE rooms (
   id VARCHAR(200) NOT NULL,
-  created_at date,
+  createdAt date,
   PRIMARY KEY (id)
 );
 
 CREATE TABLE messages (
-  id int(16) DEFAULT 0 NOT NULL AUTO_INCREMENT,
+  id int(16) AUTO_INCREMENT,
   text VARCHAR(200) NOT NULL,
-  user_id VARCHAR(200),
-  room_id VARCHAR(200),
-  created_at date,
+  userId VARCHAR(200),
+  roomId VARCHAR(200),
+  createdAt date,
   PRIMARY KEY (id),
-  FOREIGN KEY (user_id) REFERENCES users(id),
-  FOREIGN KEY (room_id) REFERENCES rooms(id)
+  FOREIGN KEY (userId) REFERENCES users(id),
+  FOREIGN KEY (roomId) REFERENCES rooms(id)
 );
 
 
