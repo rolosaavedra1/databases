@@ -11,10 +11,9 @@ module.exports = {
     });
   },
   create: function (data, callback) {
-    var userQuery = `INSERT IGNORE INTO
-    users(id, createdAt)
-    values("` + data.userId + `", "` + data.createdAt + `");`;
-    db.query(userQuery, (err, result) => {
+    var now = new Date();
+    var userQuery = 'INSERT IGNORE INTO users(id, createdAt) VALUES (?, ?);';
+    db.query(userQuery, [data.username, now], (err, result) => {
       if (err) {
         callback(err);
       } else {

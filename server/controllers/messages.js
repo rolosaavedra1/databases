@@ -7,19 +7,19 @@ module.exports = {
         res.writeHead(404, 'Access-Control-Allow-Origin *');
         res.end(err);
       } else {
-        res.writeHead(200, 'Access-Control-Allow-Origin *');
-        res.end(JSON.stringify(results));
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        res.json(results);
       }
     });
   },
   post: function (req, res) {
-    models.messages.create(req.data, (err, results) => {
+    models.messages.create(req.body, (err, results) => {
       if (err) {
         res.writeHead(404, 'Access-Control-Allow-Origin *');
         res.end(err);
       } else {
         res.writeHead(200, 'Access-Control-Allow-Origin *');
-        res.end(JSON.stringify('true'));
+        res.end('true');
       }
     });
   } // a function which handles posting a message to the database

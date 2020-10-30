@@ -6,6 +6,7 @@ module.exports = {
       if (err) {
         callback(err);
       } else {
+        console.log(result);
         callback(null, result);
       }
     });
@@ -15,26 +16,30 @@ module.exports = {
     // INSERT DATA.ROOM INSERT DATA.USER
     var userQuery = `INSERT IGNORE INTO
     users(id, createdAt)
-    values("` + data.userId + `", "` + data.createdAt + `");`;
+    values(?, ?);
+    `;
 
     var roomsQuery = `INSERT IGNORE INTO
     rooms(id, createdAt)
-    values("` + data.roomId + `", "` + data.createdAt + `");`;
+    values(?, ?);
+    `;
 
     var messagesQuery = `INSERT INTO
     messages(text, userId, roomId, createdAt)
-    values("` + data.text + `", "` + data.userId + `", "` + data.roomId + `", "` + data.createdAt + `");`;
-
-    var queries = [userQuery, roomsQuery, messagesQuery];
-
-    queries.forEach(queryString => {
-      db.query(queryString, (err, result) => {
+    values(?, ?, ?, ?);
+    `;
+    var currentDate = new Date().toJSON().slice(0, 10);
+    db.query(
+      userQuery + roomsQuery + messagesQuery + 'SHOW WARNINGS',
+      [data.username, data.createdAt, data.roomname, data.createdAt, data.message, data.username, data.roomname, currentDate],
+      (err, result) => {
+        console.log(result);
+        console.log([data.message, data.username, data.roomname, currentDate]);
         if (err) {
           callback(err);
         } else {
           callback(null, result);
         }
       });
-    });
   }
 };

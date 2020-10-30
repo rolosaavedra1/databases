@@ -9,7 +9,8 @@ var mysql = require('mysql');
 var db = mysql.createConnection({
   host: 'localhost',
   user: 'root',
-  database: 'chat'
+  database: 'chat',
+  multipleStatements: true
 });
 
 db.connect(function(err) {
